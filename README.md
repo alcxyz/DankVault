@@ -2,6 +2,8 @@
 
 A launcher plugin for [DankMaterialShell](https://github.com/AvengeMedia/DankMaterialShell) that searches your password vault and copies credentials to the clipboard.
 
+![Screenshot](docs/screenshot.png)
+
 ## Features
 
 - Multi-backend: supports rbw (Bitwarden), pass, gopass, and 1Password CLI
@@ -63,3 +65,10 @@ Auto-detection tries them in the order above and uses the first one found. Overr
 ## License
 
 MIT
+
+<details>
+<summary>Support</summary>
+
+- **BTC:** `bc1pzdt3rjhnme90ev577n0cnxvlwvclf4ys84t2kfeu9rd3rqpaaafsgmxrfa`
+- **ETH / ERC-20:** `0x2122c7817381B74762318b506c19600fF8B8372c`
+</details>
