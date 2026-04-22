@@ -72,7 +72,8 @@ QtObject {
                 icon: "material:error",
                 comment: "Press Enter to retry",
                 action: "retry:",
-                categories: ["Bitwarden"]
+                categories: ["Bitwarden"],
+                _preScored: 1000
             }];
         }
 
@@ -82,7 +83,8 @@ QtObject {
                 icon: "material:hourglass_empty",
                 comment: "Fetching entries from rbw",
                 action: "none:",
-                categories: ["Bitwarden"]
+                categories: ["Bitwarden"],
+                _preScored: 1000
             }];
         }
 
@@ -105,17 +107,28 @@ QtObject {
                     display = entry.folder + "/" + entry.name;
 
                 var comment = entry.user || "No username";
+                var entryRef = entry.name + "\t" + entry.user;
 
                 results.push({
                     name: display,
                     icon: "material:key",
-                    comment: comment,
-                    action: "copy:" + defaultAction + ":" + entry.name + "\t" + entry.user,
-                    categories: ["Bitwarden"]
+                    comment: comment + " · password",
+                    action: "copy:password:" + entryRef,
+                    categories: ["Bitwarden"],
+                    _preScored: 1000
+                });
+
+                results.push({
+                    name: display,
+                    icon: "material:pin",
+                    comment: comment + " · TOTP",
+                    action: "copy:totp:" + entryRef,
+                    categories: ["Bitwarden"],
+                    _preScored: 900
                 });
             }
 
-            if (results.length >= 50)
+            if (results.length >= 100)
                 break;
         }
 
@@ -125,7 +138,8 @@ QtObject {
                 icon: "material:search_off",
                 comment: "Try a different query",
                 action: "none:",
-                categories: ["Bitwarden"]
+                categories: ["Bitwarden"],
+                _preScored: 1000
             }];
         }
 
