@@ -179,9 +179,12 @@ QtObject {
             onStreamFinished: {
                 var value = text.trim();
                 if (value.length > 0) {
-                    Quickshell.execDetached(["sh", "-c", "printf '%s' \"$1\" | wl-copy", "sh", value]);
+                    Quickshell.execDetached(["sh", "-c",
+                        "printf '%s' \"$1\" | wl-copy --paste-once --sensitive; " +
+                        "(sleep 15 && wl-copy --clear) &",
+                        "sh", value]);
                     if (typeof ToastService !== "undefined")
-                        ToastService.showInfo("Bitwarden", "Copied " + copyFieldProcess._fieldName + " to clipboard");
+                        ToastService.showInfo("Bitwarden", "Copied " + copyFieldProcess._fieldName + " (clears in 15s)");
                 }
             }
         }
