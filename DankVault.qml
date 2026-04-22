@@ -76,7 +76,7 @@ QtObject {
                 if (fieldName === "password")
                     return ["sh", "-c", "pass show \"$1\" | head -1", "sh", path];
                 else if (fieldName === "username")
-                    return ["sh", "-c", "pass show \"$1\" | grep -i '^\\(user\\|login\\)' | head -1 | cut -d: -f2- | xargs", "sh", path];
+                    return ["sh", "-c", "pass show \"$1\" | grep -iE '^(username|user|login)\\s*:' | head -1 | cut -d: -f2- | xargs", "sh", path];
                 else if (fieldName === "totp")
                     return ["pass", "otp", path];
                 return ["sh", "-c", "pass show \"$1\" | head -1", "sh", path];
@@ -140,7 +140,7 @@ QtObject {
             getFieldCommand: function(entryName, entryUser, fieldName) {
                 if (fieldName === "totp")
                     return ["op", "item", "get", entryName, "--otp"];
-                return ["op", "item", "get", entryName, "--fields", fieldName];
+                return ["op", "item", "get", entryName, "--fields", "label=" + fieldName];
             },
             errorHint: "Are you signed in? (op signin)"
         }
