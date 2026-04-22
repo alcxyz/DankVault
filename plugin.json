@@ -1,0 +1,20 @@
+{
+    "id": "dankBitwarden",
+    "name": "Bitwarden",
+    "description": "Search and copy passwords from your Bitwarden vault via rbw",
+    "version": "0.1.0",
+    "author": "alcxyz",
+    "icon": "lock",
+    "type": "launcher",
+    "capabilities": ["launcher"],
+    "component": "./DankBitwarden.qml",
+    "settings": "./DankBitwardenSettings.qml",
+    "trigger": "@",
+    "requires_dms": ">=1.4.0",
+    "requires": ["rbw", "wl-copy"],
+    "permissions": [
+        "settings_read",
+        "settings_write",
+        "process"
+    ]
+}
