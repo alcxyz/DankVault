@@ -2,7 +2,7 @@
 
 **Status:** Accepted
 **Date:** 2026-04-22
-**Applies to:** `DankBitwarden.qml`
+**Applies to:** `DankVault.qml`
 
 ## Context
 

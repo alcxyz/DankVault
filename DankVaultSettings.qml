@@ -7,11 +7,11 @@ import qs.Modules.Plugins
 
 PluginSettings {
     id: root
-    pluginId: "dankBitwarden"
+    pluginId: "dankVault"
 
     StyledText {
         width: parent.width
-        text: I18n.tr("Bitwarden Settings")
+        text: I18n.tr("Vault Settings")
         font.pixelSize: Theme.fontSizeLarge
         font.weight: Font.Bold
         color: Theme.surfaceText
@@ -19,7 +19,7 @@ PluginSettings {
 
     StyledText {
         width: parent.width
-        text: I18n.tr("Search and copy credentials from your Bitwarden vault")
+        text: I18n.tr("Search and copy credentials from your password vault")
         font.pixelSize: Theme.fontSizeSmall
         color: Theme.surfaceVariantText
         wrapMode: Text.WordWrap
@@ -36,6 +36,27 @@ PluginSettings {
             anchors.fill: parent
             anchors.margins: Theme.spacingL
             spacing: Theme.spacingM
+
+            StyledText {
+                text: I18n.tr("Backend")
+                font.pixelSize: Theme.fontSizeMedium
+                font.weight: Font.Medium
+                color: Theme.surfaceText
+            }
+
+            SelectionSetting {
+                settingKey: "backend"
+                label: I18n.tr("Password Manager")
+                description: I18n.tr("Auto detects the first available backend")
+                options: [
+                    { value: "auto", label: "Auto-detect" },
+                    { value: "rbw", label: "rbw (Bitwarden)" },
+                    { value: "pass", label: "pass" },
+                    { value: "gopass", label: "gopass" },
+                    { value: "op", label: "1Password CLI" }
+                ]
+                defaultValue: "auto"
+            }
 
             StyledText {
                 text: I18n.tr("Activation")
@@ -98,7 +119,7 @@ PluginSettings {
             }
 
             StyledText {
-                text: I18n.tr("Search entries by name, username, or folder.\n\nDefault action copies the selected field.\nRight-click for options: copy password, username, or TOTP.\n\nRequires rbw to be installed and the vault unlocked.")
+                text: I18n.tr("Search entries by name, username, or folder.\n\nDefault action copies the selected field.\nRight-click for options: copy password, username, or TOTP.\n\nSupported backends: rbw, pass, gopass, op.\nRequires wl-copy for clipboard access.")
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.surfaceVariantText
                 wrapMode: Text.WordWrap

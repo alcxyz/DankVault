@@ -1,31 +1,42 @@
-# Contributing to DankBitwarden
+# Contributing to DankVault
 
 ## Development setup
 
-Prerequisites: [DankMaterialShell](https://github.com/AvengeMedia/DankMaterialShell) >= 1.4.0, [rbw](https://github.com/doy/rbw)
+Prerequisites: [DankMaterialShell](https://github.com/AvengeMedia/DankMaterialShell) >= 1.4.0, at least one supported backend (rbw, pass, gopass, or op)
 
 ```bash
-git clone https://github.com/alcxyz/DankBitwarden.git
-cd DankBitwarden
+git clone https://github.com/alcxyz/DankVault.git
+cd DankVault
 ```
 
 For development, symlink the plugin into the DMS plugins directory:
 
 ```bash
-ln -s "$(pwd)" ~/.config/DankMaterialShell/plugins/DankBitwarden
+ln -s "$(pwd)" ~/.config/DankMaterialShell/plugins/DankVault
 ```
 
 Reload after changes:
 
 ```bash
-dms ipc call plugins reload dankBitwarden
+dms ipc call plugins reload dankVault
 ```
 
 ## Project structure
 
 - `plugin.json` -- plugin manifest (id, type, trigger, permissions)
-- `DankBitwarden.qml` -- main launcher component (getItems, executeItem, context menu)
-- `DankBitwardenSettings.qml` -- settings UI
+- `DankVault.qml` -- main launcher component (backend registry, getItems, executeItem, context menu)
+- `DankVaultSettings.qml` -- settings UI
+
+## Adding a backend
+
+Backends are defined in the `_backends` map inside `DankVault.qml`. Each backend provides:
+
+- `listCommand()` — returns a command array to list entries
+- `parseListOutput(text)` — parses stdout into `[{name, user, folder}]`
+- `getFieldCommand(entryName, entryUser, fieldName)` — returns a command array to get a field value
+- `errorHint` — help text shown when the backend fails
+
+Add a new entry to `_backends`, a detection entry in `detectProcess`, and a settings option in `DankVaultSettings.qml`.
 
 ## Making changes
 
