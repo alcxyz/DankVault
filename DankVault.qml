@@ -14,6 +14,7 @@ QtObject {
     property string _resolvedBackend: ""
     property var _entries: []
     property bool _loading: false
+    property bool _needsRefresh: false
     property string _error: ""
 
     signal itemsChanged
@@ -158,7 +159,7 @@ QtObject {
     function _resolveBackend() {
         if (backend !== "auto") {
             _resolvedBackend = backend;
-            refreshEntries();
+            _needsRefresh = true;
             return;
         }
         detectProcess.running = true;
@@ -177,7 +178,7 @@ QtObject {
                     root.itemsChanged();
                 } else {
                     root._resolvedBackend = result;
-                    root.refreshEntries();
+                    root._needsRefresh = true;
                 }
             }
         }
@@ -219,6 +220,11 @@ QtObject {
     }
 
     function getItems(query) {
+        if (_needsRefresh && !_loading) {
+            _needsRefresh = false;
+            refreshEntries();
+        }
+
         if (_error) {
             return [{
                 name: _error,
