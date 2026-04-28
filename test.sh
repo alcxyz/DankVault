@@ -41,14 +41,14 @@ python3 -c "import json; d=json.load(open('plugin.json')); assert d['id']=='dank
     && pass "valid JSON with correct id and name" \
     || fail "plugin.json" "invalid or wrong id/name"
 
-# ── VERSION format ──────────────────────────────────────────────────
+# ── version from plugin.json ────────────────────────────────────────
 
-echo "VERSION"
-VERSION=$(cat VERSION | tr -d '[:space:]')
+echo "plugin.json version"
+VERSION=$(jq -r .version plugin.json)
 if echo "$VERSION" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+$'; then
     pass "semver format ($VERSION)"
 else
-    fail "VERSION" "'$VERSION' is not valid semver"
+    fail "plugin.json version" "'$VERSION' is not valid semver"
 fi
 
 # ── rbw output parsing ──────────────────────────────────────────────
