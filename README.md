@@ -27,7 +27,7 @@ inputs.dms-plugin-vault = {
 ```
 
 ```nix
-programs.dank-material-shell.plugins.DankVault = {
+programs.dank-material-shell.plugins.dankVault = {
   enable = true;
   src = inputs.dms-plugin-vault;
 };
