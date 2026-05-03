@@ -382,17 +382,17 @@ QtObject {
 
         return [
             {
-                icon: "key",
+                icon: "material:key",
                 text: "Copy Password",
                 action: function() { executeItem({ action: "copy:password:" + entryRef }); }
             },
             {
-                icon: "person",
+                icon: "material:person",
                 text: "Copy Username",
                 action: function() { executeItem({ action: "copy:username:" + entryRef }); }
             },
             {
-                icon: "pin",
+                icon: "material:pin",
                 text: "Copy TOTP",
                 action: function() { executeItem({ action: "copy:totp:" + entryRef }); }
             }
