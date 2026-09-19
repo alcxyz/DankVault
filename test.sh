@@ -219,6 +219,10 @@ echo "backend auto-detection"
 RESULT=$(env PATH="" /usr/bin/env bash -c 'for b in rbw pass gopass op; do command -v "$b" >/dev/null 2>&1 && echo "$b" && exit 0; done; echo none' 2>/dev/null || echo "none")
 assert_eq "detects none when no backends" "none" "$RESULT"
 
+# ── packaged build identity ─────────────────────────────────────────
+
+python3 -m unittest discover -s tests -p 'test_*.py'
+
 # ── summary ──────────────────────────────────────────────────────────
 
 echo ""
