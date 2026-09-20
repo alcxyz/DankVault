@@ -36,6 +36,8 @@ programs.dank-material-shell.plugins.dankVault = {
 ### Manual
 
 Copy the plugin directory to `~/.config/DankMaterialShell/plugins/DankVault/`.
+For an identifiable development build, stage `dist/dev` first and copy
+`dist/dev/share/dms-plugins/DankVault/` instead of the raw checkout.
 
 ## Usage
 
@@ -63,6 +65,20 @@ Auto-detection tries them in the order above and uses the first one found. Overr
 
 - `wl-copy` — Wayland clipboard utility (from wl-clipboard)
 - At least one supported password manager backend
+
++## Development builds
+
+The tracked manifest keeps the release version. To stage an identifiable
+development package, run:
+
+```bash
+python3 scripts/package.py --output dist/dev
+```
+
+This produces a manifest version like `X.Y.Z-dev.<commit>`; a dirty checkout
+adds `.dirty`. For Nix, use `pkgs.callPackage ./default.nix { revision = ...; }`.
+Release packaging is guarded and requires a clean checkout at the exact
+`vX.Y.Z` tag.
 
 ## License
 
